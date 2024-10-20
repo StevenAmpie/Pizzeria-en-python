@@ -1,12 +1,14 @@
 #Pizzeria en python
 
 import tkinter as tk
+from PIL import Image, ImageTk
 
 # window
 
 root = tk.Tk("Pizzeria")
 root.config(bg="orange", )
 root.geometry("3600x1200")
+root.grid_propagate(False)
 
 # Frames
 
@@ -14,115 +16,168 @@ frame1 = tk.Frame(bg="gray", height=500, width=500, border=20, relief="groove")
 frame1.grid(row=0, column=0, pady=150, padx=(10,0))
 frame1.grid_propagate(False)
 
-frame2 = tk.Frame(bg="gray", height=500, width=500, border=20, relief="groove")
+frame2 = tk.Frame(bg="#de2605", height=500, width=500, border=20, relief="groove")
 frame2.grid(row=0, column=1, pady=150)
 frame2.grid_propagate(False)
 
-frame3 = tk.Frame(bg="white", height=500, width=500, border=20, relief="groove")
+frame3 = tk.Frame(bg="#f16e56", height=500, width=500, border=20, relief="groove")
 frame3.grid(row=0, column=2, pady=150)
 frame3.grid_propagate(False)
+
+
+#LOGICA DEL FRAME #3
+
 
 #Radiobuttons
 
 eleccion = tk.IntVar()
 eleccion.set(1)
 
-radio1 = tk.Radiobutton(frame3, bg="white", text="Personal", variable=eleccion, value=1, width=10,
- font=("Helvetica", 16, "bold"))
+radio1 = tk.Radiobutton(frame3, bg="#f16e56", text="Personal", variable=eleccion, value=1, width=10,
+            font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
-radio2 = tk.Radiobutton(frame3, bg="white", text="Mediana ", variable=eleccion, value=2, width=10,
- font=("Helvetica", 16, "bold"))
-
-
-radio3 = tk.Radiobutton(frame3, bg="white", text="Grande   ", variable=eleccion, value=3, width=10,
- font=("Helvetica", 16, "bold"))
+radio2 = tk.Radiobutton(frame3, bg="#f16e56", text="Mediana ", variable=eleccion, value=2, width=10,
+            font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
 
-radio4 = tk.Radiobutton(frame3, bg="white", text="Familiar  ", variable=eleccion, value=4, width=10,
- font=("Helvetica", 16, "bold"))
-
-#labels
+radio3 = tk.Radiobutton(frame3, bg="#f16e56", text="Grande   ", variable=eleccion, value=3, width=10,
+            font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
 
-label1 = tk.Label(frame3, text="Ordene su pizza\n", font=("Helvetica", 16, "bold"), bg="white")
-label1.grid(row=0,column=3)
+radio4 = tk.Radiobutton(frame3, bg="#f16e56", text="Familiar  ", variable=eleccion, value=4, width=10,
+            font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
-label2 = tk.Label(frame3, text="Tamaño:", font=("Helvetica", 16, "bold"), bg="white")
-label2.grid(row=1,column=0)
-
-label3 = tk.Label(frame3, text="\n$10.00", font=("Helvetica", 16, "bold"), bg="white")
-label3.grid(row=2,column=5)
-
-label4 = tk.Label(frame3, text="$15.00", font=("Helvetica", 16, "bold"), bg="white")
-label4.grid(row=3,column=5)
-
-label5 = tk.Label(frame3, text="$20.00", font=("Helvetica", 16, "bold"), bg="white")
-label5.grid(row=4,column=5)
-
-label6 = tk.Label(frame3, text="$25.00", font=("Helvetica", 16, "bold"), bg="white")
-label6.grid(row=5,column=5)
-
-
-label7 = tk.Label(frame3, text="\nIngredientes:\n", font=("Helvetica", 16, "bold"), bg="white")
-label7.grid(row=6,column=0)
-
-#ubicacion en los radio
 
 radio1.grid(row=2, column=0,pady=(15,0))
 radio2.grid(row=3, column=0)
 radio3.grid(row=4, column=0)
 radio4.grid(row=5, column=0)
 
+#labels
 
+
+label1 = tk.Label(frame3, text="Ordene su pizza:\n", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label1.grid(row=0,column=3)
+
+label2 = tk.Label(frame3, text="Tamaño:", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label2.grid(row=1,column=0)
+
+label3 = tk.Label(frame3, text="\n$10.00", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label3.grid(row=2,column=5)
+
+label4 = tk.Label(frame3, text="$15.00", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label4.grid(row=3,column=5)
+
+label5 = tk.Label(frame3, text="$20.00", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label5.grid(row=4,column=5)
+
+label6 = tk.Label(frame3, text="$25.00", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label6.grid(row=5,column=5)
+
+
+label7 = tk.Label(frame3, text="\nIngredientes:\n", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label7.grid(row=6,column=0)
 
 #Ingredientes usando checkbox
 
-checkbutton1 = tk.Checkbutton(frame3, text="Queso    ", font=("Helvetica", 12, "bold"), bg="white")
+checkbutton1 = tk.Checkbutton(frame3, text="Queso    ", font=("Helvetica", 12, "bold"), bg="#f16e56",
+                activebackground="#f16e56")
 checkbutton1.grid(row=7, column=0)
 
-checkbutton2 = tk.Checkbutton(frame3, text="Pepperoni", font=("Helvetica", 12, "bold"), bg="white")
+checkbutton2 = tk.Checkbutton(frame3, text="Pepperoni", font=("Helvetica", 12, "bold"), bg="#f16e56",
+                activebackground="#f16e56")
 checkbutton2.grid(row=8, column=0, padx=(10,0))
 
-checkbutton3 = tk.Checkbutton(frame3, text="Jamon", font=("Helvetica", 12, "bold"), bg="white")
+checkbutton3 = tk.Checkbutton(frame3, text="Jamon", font=("Helvetica", 12, "bold"), bg="#f16e56",
+                activebackground="#f16e56")
 checkbutton3.grid(row=9, column=0, padx=(0,15))
 
-checkbutton4 = tk.Checkbutton(frame3, text="Pollo", font=("Helvetica", 12, "bold"), bg="white")
+checkbutton4 = tk.Checkbutton(frame3, text="Pollo", font=("Helvetica", 12, "bold"), bg="#f16e56",
+                activebackground="#f16e56")
 checkbutton4.grid(row=10, column=0, padx=(0, 30))
 
 #ubicacion de los labels de los precios de los ingredientes
 
 
-label7 = tk.Label(frame3, text="$1.00", font=("Helvetica", 16, "bold"), bg="white")
+label7 = tk.Label(frame3, text="$1.00", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label7.grid(row=7,column=5)
 
-label8 = tk.Label(frame3, text="$1.50", font=("Helvetica", 16, "bold"), bg="white")
+label8 = tk.Label(frame3, text="$1.50", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label8.grid(row=8,column=5)
 
-label9 = tk.Label(frame3, text="$1.25", font=("Helvetica", 16, "bold"), bg="white")
+label9 = tk.Label(frame3, text="$1.25", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label9.grid(row=9,column=5)
 
-label10 = tk.Label(frame3, text="$1.75", font=("Helvetica", 16, "bold"), bg="white")
+label10 = tk.Label(frame3, text="$1.75", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label10.grid(row=10,column=5)
 
-from PIL import Image, ImageTk
 
-# Cargar la imagen usando PIL
-image_path = "p.png"
-image = Image.open(image_path)
+#LOGICA DEL FRAME #2
+
+
+# Cargar imagenes 
+image1_path = "combo1.png"
+image2_path = "combo2.png"
+image1 = Image.open(image1_path)
+image2 = Image.open(image2_path)
 
 # Redimensionar la imagen si es necesario
-image = image.resize((300, 300))  # Ajustar tamaño si es necesario
+image1 = image1.resize((200, 200))
+image2 = image2.resize((200, 200))  
 
 # Convertir la imagen para que Tkinter pueda usarla
-tk_image = ImageTk.PhotoImage(image)
+tk_image1 = ImageTk.PhotoImage(image1)
+tk_image2 = ImageTk.PhotoImage(image2)
 
 # Crear un label y asignar la imagen
-labelImagen = tk.Label(frame2, image=tk_image)
- 
-labelImagen.grid(row=0, column=0, padx=(60,0))
+labelImagen = tk.Label(frame2, image=tk_image1)
+labelImagen.grid(row=0, column=0, padx=(25,0), pady=(5,50))
+labelImagen.grid_propagate(False)
 
-labelMenu = tk.Label(frame2, text="Ordene su pizza\n", font=("Helvetica", 16, "bold"), bg="white")
-labelMenu.grid(row=1,column=0, padx=(30,0), pady=(30,0))
+labelImagen2 = tk.Label(frame2, image=tk_image2)
+labelImagen2.grid(row=0, column=1, padx=(5,0),pady=(5,50))
+labelImagen2.grid_propagate(False)
+
+
+#labelEspacio = tk.Label(frame2, bg="white")
+#labelEspacio.grid(row=1, column=0)
+
+labelCantPizzas= tk.Label(frame2, text="Cantidad:", font=("Helvetica", 16, "bold"), 
+                          border=1, relief="ridge",bg="light coral")
+labelCantPizzas.grid(row=2, column=0)
+
+#FUNCION PARA SOLO PERMITIR ENTEROS DE LONGITUD N 
+def limitEntradas(n):
+    def validarEntrada(texto):
+        # Comprueba que el texto sea numérico y que la longitud no exceda 3 caracteres
+        if texto.isdigit() and len(texto) <= n:
+            return True
+        elif texto == "":  # Permitir borrar todo el texto
+            return True
+        else:
+            return False
+    return validarEntrada
+
+validacion =root.register(limitEntradas(3))
+
+cantPizzas = tk.Entry(frame2, width=3, validate="key", validatecommand=(validacion, '%P'), 
+                      bg="light coral", font=("Helvetica", 12, "bold"))
+cantPizzas.grid(row=2, column=1)
+
+checkCombo1 = tk.Checkbutton(frame2, text="Combo 1",border=5, relief="ridge", font=("Helvetica", 12, "bold"), bg="light coral", activebackground="#f16e56")
+checkCombo1.grid(row=3, column=0, pady=(50,0))
+
+checkCombo2 = tk.Checkbutton(frame2, text="Combo 2",border=5, relief="ridge", font=("Helvetica", 12, "bold"), bg="light coral", activebackground="#f16e56")
+checkCombo2.grid(row=3, column=1, pady=(50,0))
+
+buttonAgregar = tk.Button(frame2, text="Agregar", bg="light coral",border=5, relief="ridge", font=("Helvetica", 16, "bold"),
+                          activebackground="#f16e56")
+buttonAgregar.grid(row=4, column=1, pady=(20,0))
+
+#LOGICA DEL FRAME #1
+
+#-------
+
 
 
 #Corre en bucle el programa 
