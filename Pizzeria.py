@@ -95,10 +95,4 @@ label10 = tk.Label(frame3, text="$1.75", font=("Helvetica", 16, "bold"), bg="whi
 label10.grid(row=10,column=5)
 
 
-
-#button1 = tk.Button(frame3, text="Presioname aca", height=10, width=15)
-#button1.grid(row=0, column=1, padx=20)
-
-
-
 root.mainloop()
