@@ -118,8 +118,11 @@ tk_image = ImageTk.PhotoImage(image)
 
 # Crear un label y asignar la imagen
 labelImagen = tk.Label(frame2, image=tk_image)
+ 
+labelImagen.grid(row=0, column=0, padx=(60,0))
 
-labelImagen.grid(row=0, column=0, padx=20)
+labelMenu = tk.Label(frame2, text="Ordene su pizza\n", font=("Helvetica", 16, "bold"), bg="white")
+labelMenu.grid(row=1,column=0, padx=(30,0), pady=(30,0))
 
 
 #Corre en bucle el programa 
