@@ -8,6 +8,7 @@ from PIL import Image, ImageTk
 root = tk.Tk("Pizzeria")
 root.config(bg="orange", )
 root.geometry("3600x1200")
+root.title("Voglio la pizza")
 root.grid_propagate(False)
 
 # Frames
@@ -24,6 +25,14 @@ frame3 = tk.Frame(bg="#f16e56", height=500, width=500, border=20, relief="groove
 frame3.grid(row=0, column=2, pady=150)
 frame3.grid_propagate(False)
 
+#LOGICA DEL FRAME #1
+
+
+
+
+
+
+
 
 #LOGICA DEL FRAME #3
 
@@ -31,30 +40,36 @@ frame3.grid_propagate(False)
 #Radiobuttons
 
 eleccion = tk.IntVar()
-eleccion.set(1)
+eleccion.set(0)
 
-radio1 = tk.Radiobutton(frame3, bg="#f16e56", text="Personal", variable=eleccion, value=1, width=10,
+
+radio1 = tk.Radiobutton(frame3, bg="#f16e56", text="Personal", variable=eleccion, value=10, width=10,
             font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
-radio2 = tk.Radiobutton(frame3, bg="#f16e56", text="Mediana ", variable=eleccion, value=2, width=10,
-            font=("Helvetica", 16, "bold"), activebackground="#f16e56")
-
-
-radio3 = tk.Radiobutton(frame3, bg="#f16e56", text="Grande   ", variable=eleccion, value=3, width=10,
+radio2 = tk.Radiobutton(frame3, bg="#f16e56", text="Mediana ", variable=eleccion, value=15, width=10,
             font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
 
-radio4 = tk.Radiobutton(frame3, bg="#f16e56", text="Familiar  ", variable=eleccion, value=4, width=10,
+radio3 = tk.Radiobutton(frame3, bg="#f16e56", text="Grande   ", variable=eleccion, value=20, width=10,
             font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
+
+radio4 = tk.Radiobutton(frame3, bg="#f16e56", text="Familiar  ", variable=eleccion, value=25, width=10,
+            font=("Helvetica", 16, "bold"), activebackground="#f16e56")
 
 radio1.grid(row=2, column=0,pady=(15,0))
 radio2.grid(row=3, column=0)
 radio3.grid(row=4, column=0)
 radio4.grid(row=5, column=0)
 
+
+
 #labels
 
+checkVariable1=tk.IntVar()
+checkVariable2=tk.IntVar()
+checkVariable3=tk.IntVar()
+checkVariable4=tk.IntVar()
 
 label1 = tk.Label(frame3, text="Ordene su pizza:\n", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label1.grid(row=0,column=3)
@@ -79,21 +94,35 @@ label7 = tk.Label(frame3, text="\nIngredientes:\n", font=("Helvetica", 16, "bold
 label7.grid(row=6,column=0)
 
 #Ingredientes usando checkbox
+contador=0
+def sumarContador(variableCheck):
+
+    #la variable contador ayudara a mantener el control de que sean unicamente 3 checkbuttons
+    # se vera mas adelante esta logica
+    
+    global contador
+    if variableCheck.get() == 1:
+        contador=1
+    else:
+        contador=0
+    print(contador)
+
 
 checkbutton1 = tk.Checkbutton(frame3, text="Queso    ", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56")
+                activebackground="#f16e56", variable=checkVariable1, command=lambda: sumarContador(checkVariable1))
 checkbutton1.grid(row=7, column=0)
 
 checkbutton2 = tk.Checkbutton(frame3, text="Pepperoni", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56")
+                activebackground="#f16e56", variable=checkVariable2, command=lambda: sumarContador(checkVariable2))
 checkbutton2.grid(row=8, column=0, padx=(10,0))
 
 checkbutton3 = tk.Checkbutton(frame3, text="Jamon", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56")
+                activebackground="#f16e56", variable=checkVariable3, command=lambda: sumarContador(checkVariable3))
 checkbutton3.grid(row=9, column=0, padx=(0,15))
 
 checkbutton4 = tk.Checkbutton(frame3, text="Pollo", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56")
+                activebackground="#f16e56", variable=checkVariable4,
+                command=lambda: sumarContador(checkVariable4))    
 checkbutton4.grid(row=10, column=0, padx=(0, 30))
 
 #ubicacion de los labels de los precios de los ingredientes
@@ -110,6 +139,30 @@ label9.grid(row=9,column=5)
 
 label10 = tk.Label(frame3, text="$1.75", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label10.grid(row=10,column=5)
+
+rowPedidos=0
+columnPedidos=0
+
+checkVariables = [checkVariable1, checkVariable2, checkVariable3, checkVariable4]
+checkbotones = [checkbutton1, checkbutton2, checkbutton3, checkbutton4]
+
+total = 0
+
+def pedidos():
+
+    global radios
+    global rowPedidos
+    global columnPedidos
+    global total
+
+    total = eleccion.get()
+
+    pedido=tk.Label(frame1, text=f"Pedido#{rowPedidos+1}", font=("Helvetica", 16, "bold"))
+    pedido.grid(row=rowPedidos, column=columnPedidos)
+    rowPedidos+=1
+    totalLabel = tk.Label(frame1, text=f'Total={total}', font=("Helvetica", 16, "bold"))
+    totalLabel.grid(row=0, column=1, )
+
 
 
 #LOGICA DEL FRAME #2
@@ -171,14 +224,8 @@ checkCombo2 = tk.Checkbutton(frame2, text="Combo 2",border=5, relief="ridge", fo
 checkCombo2.grid(row=3, column=1, pady=(50,0))
 
 buttonAgregar = tk.Button(frame2, text="Agregar", bg="light coral",border=5, relief="ridge", font=("Helvetica", 16, "bold"),
-                          activebackground="#f16e56")
+                          activebackground="#f16e56", command=pedidos)
 buttonAgregar.grid(row=4, column=1, pady=(20,0))
-
-#LOGICA DEL FRAME #1
-
-#-------
-
-
 
 #Corre en bucle el programa 
 root.mainloop()
