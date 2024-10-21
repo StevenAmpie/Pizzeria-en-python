@@ -13,7 +13,7 @@ root.grid_propagate(False)
 
 # Frames
 
-frame1 = tk.Frame(bg="gray", height=500, width=500, border=20, relief="groove")
+frame1 = tk.Frame(bg="#933b2a", height=500, width=500, border=20, relief="groove")
 frame1.grid(row=0, column=0, pady=150, padx=(10,0))
 frame1.grid_propagate(False)
 
@@ -27,12 +27,34 @@ frame3.grid_propagate(False)
 
 #LOGICA DEL FRAME #1
 
+subFrame1 = tk.Frame(frame1, width=100, height=50, bg="gray", border=20, relief="sunken")
+subFrame1.grid(row=0, column=0, padx=(15,0))
+
+subFrame2 = tk.Frame(frame1, width=400, height=300,bg="white", border="10")
+subFrame2.grid(row=1, column=0, padx=(25,25))
+subFrame2.grid_propagate(False)
+
+subFrame3 = tk.Frame(frame1, width=400, height=100, highlightbackground="black",  bg="#ffd9d2", border="10")
+subFrame3.grid(row=2, column=0, padx=(25,25))
+subFrame3.grid_propagate(False)
+
+subLabelSubTotal = tk.Label(subFrame3, text="subTotal", font=("Helvetica", 8, "bold"))
+subLabelSubTotal.grid(row=0, column=0)
+
+subLabelDescuento = tk.Label(subFrame3, text="Descuento", font=("Helvetica", 8, "bold"))
+subLabelDescuento.grid(row=1, column=0, pady=(5,5))
+
+sublabelTotal= tk.Label(subFrame3, text="Total", font=("Helvetica", 8, "bold") )
+sublabelTotal.grid(row=2, column=0)
 
 
+labelNumTotal = tk.Label(subFrame3, text="$100")
+labelDescuento = tk.Label(subFrame3, text="$20")
+labelNumSubTotal = tk.Label(subFrame3, text="$80")
 
-
-
-
+labelNumTotal.grid(row=0, column=1)
+labelDescuento.grid(row=1, column=1)
+labelNumSubTotal.grid(row=2, column=1)
 
 #LOGICA DEL FRAME #3
 
@@ -157,10 +179,10 @@ def pedidos():
 
     total = eleccion.get()
 
-    pedido=tk.Label(frame1, text=f"Pedido#{rowPedidos+1}", font=("Helvetica", 16, "bold"))
+    pedido=tk.Label(subFrame2, text=f"Pedido#{rowPedidos+1}", font=("Helvetica", 16, "bold"))
     pedido.grid(row=rowPedidos, column=columnPedidos)
     rowPedidos+=1
-    totalLabel = tk.Label(frame1, text=f'Total={total}', font=("Helvetica", 16, "bold"))
+    totalLabel = tk.Label(subFrame2, text=f'Total={total}', font=("Helvetica", 16, "bold"))
     totalLabel.grid(row=0, column=1, )
 
 
