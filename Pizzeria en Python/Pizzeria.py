@@ -3,6 +3,15 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
+total = 0
+rowPedidos=0
+columnPedidos=0
+totalCheckButtons=0
+totalCompras=0
+descuentoTotal = 0
+descuentoTemporal = 0
+subTotalFinal = 0
+
 # window
 
 root = tk.Tk("Pizzeria")
@@ -30,7 +39,8 @@ frame3.grid_propagate(False)
 subFrame1 = tk.Frame(frame1, width=100, height=50, bg="gray", border=20, relief="sunken")
 subFrame1.grid(row=0, column=0, padx=(15,0))
 
-subFrame2 = tk.Frame(frame1, width=400, height=300, highlightbackground="black", highlightthickness=1, bg="white", border="10")
+subFrame2 = tk.Frame(frame1, width=400, height=300, highlightbackground="black", highlightthickness=1, 
+                     bg="white", border="10")
 subFrame2.grid(row=1, column=0, padx=(25,25))
 subFrame2.grid_propagate(False)
 
@@ -50,14 +60,15 @@ subLabelDescuento.grid(row=1, column=0, pady=(5,5))
 sublabelTotal= tk.Label(subFrame3, bg="white",text="Total", font=("Helvetica", 12, "bold") )
 sublabelTotal.grid(row=2, column=0)
 
+totalLabels = 0
 
-labelNumTotal = tk.Label(subFrame3, text="$100", font=("Helvetica", 12, "bold"))
-labelDescuento = tk.Label(subFrame3, text="$20", font=("Helvetica", 12, "bold"))
-labelNumSubTotal = tk.Label(subFrame3, text="$80", font=("Helvetica", 12, "bold"))
+labelNumTotal = tk.Label(subFrame3, text=f'$0', font=("Helvetica", 12, "bold"))
+labelDescuento = tk.Label(subFrame3, text="$ Descuento", font=("Helvetica", 12, "bold"))
+labelNumSubTotal = tk.Label(subFrame3, text=f"$0", font=("Helvetica", 12, "bold"))
 
-labelNumTotal.grid(row=0, column=1)
+labelNumSubTotal.grid(row=0, column=1)
 labelDescuento.grid(row=1, column=1)
-labelNumSubTotal.grid(row=2, column=1)
+labelNumTotal.grid(row=2, column=1)
 
 #LOGICA DEL FRAME #3
 
@@ -98,8 +109,8 @@ checkVariable4=tk.IntVar()
 checkVariable5=tk.IntVar()
 checkVariable6=tk.IntVar()
 
-label1 = tk.Label(frame3, text="Ordene su pizza:\n", font=("Helvetica", 16, "bold"), bg="#f16e56")
-label1.grid(row=0,column=3)
+label1 = tk.Label(frame3, text="Ordene su pizza:", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label1.grid(row=0,column=2)
 
 label2 = tk.Label(frame3, text="Tamaño:", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label2.grid(row=1,column=0)
@@ -118,7 +129,7 @@ label6.grid(row=5,column=5)
 
 
 label7 = tk.Label(frame3, text="Ingredientes:", font=("Helvetica", 16, "bold"), bg="#f16e56")
-label7.grid(row=6,column=0, pady=(3,0))
+label7.grid(row=6,column=0, pady=(10,10))
 
 #Ingredientes usando checkbox
 
@@ -150,7 +161,7 @@ checkbutton5 = tk.Checkbutton(frame3, text="Tocino    ", font=("Helvetica", 12, 
 checkbutton5.grid(row=11, column=0)
 
 checkbutton6 = tk.Checkbutton(frame3, text="Salsa Chipotle", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56", variable=checkVariable6,
+                activebackground="#f16e56", variable=checkVariable6, 
                 command=lambda: sumarContador(checkVariable6, 3))    
 checkbutton6.grid(row=12, column=0, padx=(40,0))
 
@@ -174,10 +185,6 @@ label11.grid(row=11,column=5)
 
 label12 = tk.Label(frame3, text="$2.75", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label12.grid(row=12,column=5)
-
-
-rowPedidos=0
-columnPedidos=0
 
 checkVariables = [checkVariable1, checkVariable2, checkVariable3, checkVariable4, checkVariable5, checkVariable6]
 checkBotones = [checkbutton1, checkbutton2, checkbutton3, checkbutton4, checkbutton5, checkbutton6]
@@ -292,28 +299,6 @@ def combo2(variableCombo):
         checkbutton3.config(state="normal")
         checkbutton4.config(state="normal")
         checkbutton6.config(state="normal")
-        
-
-total = 0
-
-#FUNCION PARA LOS PEDIDOS
-
-def pedidos():
-
-    global radios
-    global rowPedidos
-    global columnPedidos
-    global total
-
-    total = eleccion.get()
-
-    pedido=tk.Label(subFrame2, text=f"Pedido#{rowPedidos+1}", font=("Helvetica", 16, "bold"))
-    pedido.grid(row=rowPedidos, column=columnPedidos)
-    rowPedidos+=1
-    totalLabel = tk.Label(subFrame2, text=f'Total={total}', font=("Helvetica", 16, "bold"))
-    totalLabel.grid(row=0, column=1, )
-
-
 
 #LOGICA DEL FRAME #2
 
@@ -363,7 +348,7 @@ def limitEntradas(n):
 
 validacion =root.register(limitEntradas(1))
 
-cantPizzas = tk.Entry(frame2, width=3, validate="key", validatecommand=(validacion, '%P'), 
+cantPizzas = tk.Entry(frame2, width=3,validate="key", validatecommand=(validacion, '%P'), 
                       bg="light coral", font=("Helvetica", 12, "bold"))
 cantPizzas.grid(row=2, column=1)
 
@@ -378,8 +363,127 @@ checkCombo2 = tk.Checkbutton(frame2, text="Combo 2",border=5, relief="ridge",
     font=("Helvetica", 12, "bold"), variable=variableCombo2, command= lambda: combo2(variableCombo2), bg="light coral", activebackground="#f16e56")
 checkCombo2.grid(row=3, column=1, pady=(50,0))
 
+
+#LOGICA BOTON AGREGAR
+
+def getPrecios():
+    global totalCheckButtons
+    global checkBotones
+    totalCheckButtons=0
+
+    preciosIngredientes={
+                         checkbutton1: 1.00,
+                         checkbutton2: 1.50,
+                         checkbutton3: 1.25,
+                         checkbutton4: 1.75,
+                         checkbutton5: 1.10,
+                         checkbutton6: 2.75
+                        }
+    
+    for i in contenedor:
+
+        totalCheckButtons+=preciosIngredientes[i]
+    
+
+#def descuento(total):
+
+ #   global descuentoTemporal
+    
+  #  descuentoTemporal=0
+
+   # total = total*int(cantPizzas.get())
+
+   # if(total > 30):
+       # descuentoTemporal = total*0.05
+       # return descuentoTemporal
+    
+  #  elif(total >=20 and total <=30):
+
+   #     descuentoTemporal = total*0.02
+   #     return descuentoTemporal
+
+subTotal = 0
+
+def agregar():
+
+    global radios
+    global rowPedidos
+    global columnPedidos
+    global total
+    global totalCheckButtons
+    global totalLabels5
+    global totalCompras
+    global descuentoTotal
+    global subTotal
+    global descuentoTemporal
+    global subTotalFinal
+   
+    descuentoTemporal=0
+
+    total=0
+
+    getPrecios()
+     
+
+    if((rowPedidos+1)<=10):
+
+        
+        if(variableCombo1.get() == 1):
+            subTotal = (eleccion.get() + totalCheckButtons + 1.50)*int(cantPizzas.get())
+            
+
+            if(subTotal > 30):
+                descuentoTemporal = subTotal*0.05
+    
+            elif(subTotal >=20 and total <=30):
+                descuentoTemporal = subTotal*0.02
+            
+            descuentoTotal+=descuentoTemporal
+            
+            totalCompras = totalCompras+subTotal-descuentoTemporal
+            subTotalFinal = totalCompras
+        
+        elif(variableCombo2.get() == 1):
+           
+            subTotal = (eleccion.get() + totalCheckButtons + 1.50)*int(cantPizzas.get())
+
+            if(subTotal > 30):
+                descuentoTemporal = subTotal*0.05
+    
+            elif(subTotal >=20 and total <=30):
+                descuentoTemporal = subTotal*0.02
+            
+            descuentoTotal+=descuentoTemporal
+            
+            totalCompras = totalCompras+subTotal-descuentoTemporal
+            subTotalFinal = totalCompras
+
+        else:
+            subTotal = (eleccion.get() + totalCheckButtons)
+            totalCompras += subTotal
+            subTotalFinal = totalCompras
+        
+
+        pedido=tk.Label(subFrame2, text=f"Pedido#{rowPedidos+1} = {round(subTotal/int(cantPizzas.get()), 2)}*({int(cantPizzas.get())})", font=("Helvetica", 10, "bold"))
+        pedido.grid(row=rowPedidos+1, column=0, padx=(0,100))
+        rowPedidos+=1
+
+        print(totalCompras)
+
+        labelNumSubTotal.config(text=f'${round(subTotalFinal+descuentoTotal, 2)}')
+        labelDescuento.config(text=round(descuentoTotal, 2))
+        labelNumTotal.config(text=f'${round((totalCompras), 2)}')
+
+#def agregar():
+
+
+
+
+
+
+
 buttonAgregar = tk.Button(frame2, text="Agregar", bg="light coral",border=5, relief="ridge", font=("Helvetica", 16, "bold"),
-                          activebackground="#f16e56", command=pedidos)
+                          activebackground="#f16e56", command=agregar)
 buttonAgregar.grid(row=4, column=1, pady=(20,0))
 
 #Corre en bucle el programa 
