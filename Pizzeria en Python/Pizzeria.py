@@ -487,4 +487,7 @@ buttonAgregar = tk.Button(frame2, text="Agregar", bg="light coral",border=5, rel
 buttonAgregar.grid(row=4, column=1, pady=(20,0))
 
 #Corre en bucle el programa 
+
+print("LLego al final")
+
 root.mainloop()
