@@ -30,14 +30,14 @@ frame3.grid_propagate(False)
 subFrame1 = tk.Frame(frame1, width=100, height=50, bg="gray", border=20, relief="sunken")
 subFrame1.grid(row=0, column=0, padx=(15,0))
 
-subFrame2 = tk.Frame(frame1, width=400, height=300,bg="#7bd6c7", border="10")
+subFrame2 = tk.Frame(frame1, width=400, height=300, highlightbackground="black", highlightthickness=1, bg="white", border="10")
 subFrame2.grid(row=1, column=0, padx=(25,25))
 subFrame2.grid_propagate(False)
 
 labelFactura = tk.Label(subFrame2, text="Factura", bg="white", font=("Helvetica", 20, "bold"))
 labelFactura.grid(row=0, column=0, padx=(140,0))
 
-subFrame3 = tk.Frame(frame1, width=400, height=100, highlightbackground="black",  bg="white", border="10")
+subFrame3 = tk.Frame(frame1, width=400, height=100, highlightbackground="black", highlightthickness=1,  bg="white", border="10")
 subFrame3.grid(row=2, column=0, padx=(25,25))
 subFrame3.grid_propagate(False)
 
@@ -211,9 +211,87 @@ def sumarContador(checkVariable, n):
                 print(f"Boton {i}")
 
 
-#def combos():
+def combo1(variableCombo):
 
+    global contenedor
 
+    if variableCombo.get() == 1:
+
+        
+        contenedor=[]
+        variableCombo2.set(0)
+
+        #Limpiamos los botones para evitar errores
+
+        checkVariable3.set(0)
+        checkVariable4.set(0)
+        checkVariable5.set(0)
+
+        checkVariable1.set(1)
+        sumarContador(checkVariable1, 3)
+        checkVariable2.set(1)
+        sumarContador(checkVariable2, 3)
+        checkVariable6.set(1)
+        sumarContador(checkVariable6, 3)
+
+        eleccion.set(20)
+
+    else:
+
+        contenedor=[]
+
+        eleccion.set(0)
+
+        checkVariable1.set(0)
+       
+        checkVariable2.set(0)
+        
+        checkVariable6.set(0)
+
+        checkbutton3.config(state="normal")
+        checkbutton4.config(state="normal")
+        checkbutton5.config(state="normal")
+
+        
+def combo2(variableCombo):
+
+    global contenedor
+
+    if variableCombo.get() == 1:
+
+        variableCombo1.set(0)
+        contenedor=[]
+
+        #Limpiamos los botones para evitar errores
+
+        checkVariable3.set(0)
+        checkVariable4.set(0)
+        checkVariable6.set(0)
+
+        checkVariable1.set(1)
+        sumarContador(checkVariable1, 3)
+        checkVariable2.set(1)
+        sumarContador(checkVariable2, 3)
+        checkVariable5.set(1)
+        sumarContador(checkVariable5, 3)
+
+        eleccion.set(15)
+
+    else:
+
+        contenedor=[]
+
+        eleccion.set(0)
+
+        checkVariable1.set(0)
+       
+        checkVariable2.set(0)
+        
+        checkVariable5.set(0)
+
+        checkbutton3.config(state="normal")
+        checkbutton4.config(state="normal")
+        checkbutton6.config(state="normal")
         
 
 total = 0
@@ -283,16 +361,21 @@ def limitEntradas(n):
             return False
     return validarEntrada
 
-validacion =root.register(limitEntradas(3))
+validacion =root.register(limitEntradas(1))
 
 cantPizzas = tk.Entry(frame2, width=3, validate="key", validatecommand=(validacion, '%P'), 
                       bg="light coral", font=("Helvetica", 12, "bold"))
 cantPizzas.grid(row=2, column=1)
 
-checkCombo1 = tk.Checkbutton(frame2, text="Combo 1",border=5, relief="ridge", font=("Helvetica", 12, "bold"), bg="light coral", activebackground="#f16e56")
+variableCombo1 = tk.IntVar()
+variableCombo2 = tk.IntVar()
+
+checkCombo1 = tk.Checkbutton(frame2, text="Combo 1",border=5, 
+    relief="ridge", variable=variableCombo1, command=lambda: combo1(variableCombo1), font=("Helvetica", 12, "bold"), bg="light coral", activebackground="#f16e56")
 checkCombo1.grid(row=3, column=0, pady=(50,0))
 
-checkCombo2 = tk.Checkbutton(frame2, text="Combo 2",border=5, relief="ridge", font=("Helvetica", 12, "bold"), bg="light coral", activebackground="#f16e56")
+checkCombo2 = tk.Checkbutton(frame2, text="Combo 2",border=5, relief="ridge", 
+    font=("Helvetica", 12, "bold"), variable=variableCombo2, command= lambda: combo2(variableCombo2), bg="light coral", activebackground="#f16e56")
 checkCombo2.grid(row=3, column=1, pady=(50,0))
 
 buttonAgregar = tk.Button(frame2, text="Agregar", bg="light coral",border=5, relief="ridge", font=("Helvetica", 16, "bold"),
