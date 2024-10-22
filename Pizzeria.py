@@ -13,7 +13,7 @@ root.grid_propagate(False)
 
 # Frames
 
-frame1 = tk.Frame(bg="#933b2a", height=500, width=500, border=20, relief="groove")
+frame1 = tk.Frame(bg="#d66439", height=500, width=500, border=20, relief="groove")
 frame1.grid(row=0, column=0, pady=150, padx=(10,0))
 frame1.grid_propagate(False)
 
@@ -30,27 +30,30 @@ frame3.grid_propagate(False)
 subFrame1 = tk.Frame(frame1, width=100, height=50, bg="gray", border=20, relief="sunken")
 subFrame1.grid(row=0, column=0, padx=(15,0))
 
-subFrame2 = tk.Frame(frame1, width=400, height=300,bg="white", border="10")
+subFrame2 = tk.Frame(frame1, width=400, height=300,bg="#7bd6c7", border="10")
 subFrame2.grid(row=1, column=0, padx=(25,25))
 subFrame2.grid_propagate(False)
 
-subFrame3 = tk.Frame(frame1, width=400, height=100, highlightbackground="black",  bg="#ffd9d2", border="10")
+labelFactura = tk.Label(subFrame2, text="Factura", bg="white", font=("Helvetica", 20, "bold"))
+labelFactura.grid(row=0, column=0, padx=(140,0))
+
+subFrame3 = tk.Frame(frame1, width=400, height=100, highlightbackground="black",  bg="white", border="10")
 subFrame3.grid(row=2, column=0, padx=(25,25))
 subFrame3.grid_propagate(False)
 
-subLabelSubTotal = tk.Label(subFrame3, text="subTotal", font=("Helvetica", 8, "bold"))
+subLabelSubTotal = tk.Label(subFrame3, bg="white",text="SubTotal", font=("Helvetica", 12, "bold"))
 subLabelSubTotal.grid(row=0, column=0)
 
-subLabelDescuento = tk.Label(subFrame3, text="Descuento", font=("Helvetica", 8, "bold"))
+subLabelDescuento = tk.Label(subFrame3, bg="white",text="Descuento", font=("Helvetica", 12, "bold"))
 subLabelDescuento.grid(row=1, column=0, pady=(5,5))
 
-sublabelTotal= tk.Label(subFrame3, text="Total", font=("Helvetica", 8, "bold") )
+sublabelTotal= tk.Label(subFrame3, bg="white",text="Total", font=("Helvetica", 12, "bold") )
 sublabelTotal.grid(row=2, column=0)
 
 
-labelNumTotal = tk.Label(subFrame3, text="$100")
-labelDescuento = tk.Label(subFrame3, text="$20")
-labelNumSubTotal = tk.Label(subFrame3, text="$80")
+labelNumTotal = tk.Label(subFrame3, text="$100", font=("Helvetica", 12, "bold"))
+labelDescuento = tk.Label(subFrame3, text="$20", font=("Helvetica", 12, "bold"))
+labelNumSubTotal = tk.Label(subFrame3, text="$80", font=("Helvetica", 12, "bold"))
 
 labelNumTotal.grid(row=0, column=1)
 labelDescuento.grid(row=1, column=1)
@@ -92,6 +95,8 @@ checkVariable1=tk.IntVar()
 checkVariable2=tk.IntVar()
 checkVariable3=tk.IntVar()
 checkVariable4=tk.IntVar()
+checkVariable5=tk.IntVar()
+checkVariable6=tk.IntVar()
 
 label1 = tk.Label(frame3, text="Ordene su pizza:\n", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label1.grid(row=0,column=3)
@@ -112,40 +117,42 @@ label6 = tk.Label(frame3, text="$25.00", font=("Helvetica", 16, "bold"), bg="#f1
 label6.grid(row=5,column=5)
 
 
-label7 = tk.Label(frame3, text="\nIngredientes:\n", font=("Helvetica", 16, "bold"), bg="#f16e56")
-label7.grid(row=6,column=0)
+label7 = tk.Label(frame3, text="Ingredientes:", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label7.grid(row=6,column=0, pady=(3,0))
 
 #Ingredientes usando checkbox
-contador=0
-def sumarContador(variableCheck):
 
-    #la variable contador ayudara a mantener el control de que sean unicamente 3 checkbuttons
-    # se vera mas adelante esta logica
-    
-    global contador
-    if variableCheck.get() == 1:
-        contador=1
-    else:
-        contador=0
-    print(contador)
-
+#FUNCION PARA CHEQUEAR LOS CHECKKBUTTONS   
 
 checkbutton1 = tk.Checkbutton(frame3, text="Queso    ", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56", variable=checkVariable1, command=lambda: sumarContador(checkVariable1))
+                activebackground="#f16e56", variable=checkVariable1, 
+                command=lambda: sumarContador(checkVariable1, 3))
 checkbutton1.grid(row=7, column=0)
 
 checkbutton2 = tk.Checkbutton(frame3, text="Pepperoni", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56", variable=checkVariable2, command=lambda: sumarContador(checkVariable2))
+                activebackground="#f16e56", variable=checkVariable2, 
+                command=lambda: sumarContador(checkVariable2, 3))
 checkbutton2.grid(row=8, column=0, padx=(10,0))
 
 checkbutton3 = tk.Checkbutton(frame3, text="Jamon", font=("Helvetica", 12, "bold"), bg="#f16e56",
-                activebackground="#f16e56", variable=checkVariable3, command=lambda: sumarContador(checkVariable3))
+                activebackground="#f16e56", variable=checkVariable3, 
+                command=lambda: sumarContador(checkVariable3, 3))
 checkbutton3.grid(row=9, column=0, padx=(0,15))
 
 checkbutton4 = tk.Checkbutton(frame3, text="Pollo", font=("Helvetica", 12, "bold"), bg="#f16e56",
                 activebackground="#f16e56", variable=checkVariable4,
-                command=lambda: sumarContador(checkVariable4))    
+                command=lambda: sumarContador(checkVariable4, 3))    
 checkbutton4.grid(row=10, column=0, padx=(0, 30))
+
+checkbutton5 = tk.Checkbutton(frame3, text="Tocino    ", font=("Helvetica", 12, "bold"), bg="#f16e56",
+                activebackground="#f16e56", variable=checkVariable5,
+                command=lambda: sumarContador(checkVariable5, 3))    
+checkbutton5.grid(row=11, column=0)
+
+checkbutton6 = tk.Checkbutton(frame3, text="Salsa Chipotle", font=("Helvetica", 12, "bold"), bg="#f16e56",
+                activebackground="#f16e56", variable=checkVariable6,
+                command=lambda: sumarContador(checkVariable6, 3))    
+checkbutton6.grid(row=12, column=0, padx=(40,0))
 
 #ubicacion de los labels de los precios de los ingredientes
 
@@ -162,13 +169,56 @@ label9.grid(row=9,column=5)
 label10 = tk.Label(frame3, text="$1.75", font=("Helvetica", 16, "bold"), bg="#f16e56")
 label10.grid(row=10,column=5)
 
+label11 = tk.Label(frame3, text="$1.10", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label11.grid(row=11,column=5)
+
+label12 = tk.Label(frame3, text="$2.75", font=("Helvetica", 16, "bold"), bg="#f16e56")
+label12.grid(row=12,column=5)
+
+
 rowPedidos=0
 columnPedidos=0
 
-checkVariables = [checkVariable1, checkVariable2, checkVariable3, checkVariable4]
-checkbotones = [checkbutton1, checkbutton2, checkbutton3, checkbutton4]
+checkVariables = [checkVariable1, checkVariable2, checkVariable3, checkVariable4, checkVariable5, checkVariable6]
+checkBotones = [checkbutton1, checkbutton2, checkbutton3, checkbutton4, checkbutton5, checkbutton6]
+contenedor = []
+
+def sumarContador(checkVariable, n):
+
+    #la variable contador ayudara a mantener el control de que sean unicamente 3 checkbuttons
+    # se vera mas adelante esta logica
+    
+    global contador
+    global contenedor
+    #checkBotones = [checkbutton1, checkbutton2, checkbutton3, checkbutton4]
+   
+    if(checkVariable.get() == 1 ):
+        print(f"Entro boton #{checkVariables.index(checkVariable)+1}")
+        contenedor.append(checkBotones[checkVariables.index(checkVariable)])
+    else:
+        print(f"Se apago boton #{checkVariables.index(checkVariable)+1}")
+        contenedor.pop(contenedor.index(checkBotones[checkVariables.index(checkVariable)]))
+            
+
+    if(len(contenedor) == n):
+        for i in checkBotones:
+            if(i not in contenedor):
+                i.config(state="disabled")
+                
+    else:
+        for i in checkBotones:
+            if(i.config(state="normal") == "normal"):
+                print(f"Boton {i}")
+
+
+#def combos():
+
+
+        
 
 total = 0
+
+#FUNCION PARA LOS PEDIDOS
 
 def pedidos():
 
