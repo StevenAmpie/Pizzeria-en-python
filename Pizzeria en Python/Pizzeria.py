@@ -319,8 +319,8 @@ def pedidos():
 
 
 # Cargar imagenes 
-image1_path = "combo1.png"
-image2_path = "combo2.png"
+image1_path = "Pizzeria en Python/combo1.png"
+image2_path = "Pizzeria en Python/combo2.png"
 image1 = Image.open(image1_path)
 image2 = Image.open(image2_path)
 
