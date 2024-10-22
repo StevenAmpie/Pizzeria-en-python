@@ -63,7 +63,7 @@ sublabelTotal.grid(row=2, column=0)
 totalLabels = 0
 
 labelNumTotal = tk.Label(subFrame3, text=f'$0', font=("Helvetica", 12, "bold"))
-labelDescuento = tk.Label(subFrame3, text="$ Descuento", font=("Helvetica", 12, "bold"))
+labelDescuento = tk.Label(subFrame3, text="$0", font=("Helvetica", 12, "bold"))
 labelNumSubTotal = tk.Label(subFrame3, text=f"$0", font=("Helvetica", 12, "bold"))
 
 labelNumSubTotal.grid(row=0, column=1)
