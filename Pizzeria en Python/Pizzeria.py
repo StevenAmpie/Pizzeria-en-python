@@ -25,15 +25,19 @@ root.grid_propagate(False)
 
 # Frames
 
-frame1 = tk.Frame(bg="#d66439", height=500, width=500, border=20, relief="groove")
+frame1 = tk.Frame(root, bg="#d66439", height=500, width=500, border=20, relief="groove")
 frame1.grid(row=0, column=0, pady=150, padx=(10,0))
 frame1.grid_propagate(False)
 
-frame2 = tk.Frame(bg="#de2605", height=500, width=500, border=20, relief="groove")
+frame2 = tk.Frame(root, bg="#de2605", height=500, width=500, border=20, relief="groove")
 frame2.grid(row=0, column=1, pady=150)
 frame2.grid_propagate(False)
 
-frame3 = tk.Frame(bg="#f16e56", height=500, width=500, border=20, relief="groove")
+labelTitulo = tk.Label(root, text="Voglio la pizza",foreground="black",bg="#d66439",height=2, width=22,  font=("Garamond", 25, "bold"), border=10, relief="groove")
+labelTitulo.grid(row=0, column=1, padx=(20,30), pady=(0,650))
+labelTitulo.grid_propagate(False)
+
+frame3 = tk.Frame(root, bg="#f16e56", height=500, width=500, border=20, relief="groove")
 frame3.grid(row=0, column=2, pady=150)
 frame3.grid_propagate(False)
 
