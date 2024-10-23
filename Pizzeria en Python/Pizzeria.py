@@ -273,6 +273,8 @@ def limitCheckButtons(checkVariable, n):
 
 def combo1(variableCombo):
 
+    
+
     global contenedor
 
     if variableCombo.get() == 1:
@@ -296,6 +298,8 @@ def combo1(variableCombo):
 
         eleccion.set(20)
 
+        checkearStatusCombo()
+
     else:
 
         contenedor=[]
@@ -316,6 +320,8 @@ def combo1(variableCombo):
 
         
 def combo2(variableCombo):
+
+    
 
     global contenedor
 
@@ -338,6 +344,8 @@ def combo2(variableCombo):
         limitCheckButtons(checkVariable5, 3)
 
         eleccion.set(15)
+
+        checkearStatusCombo()
 
     else:
 
