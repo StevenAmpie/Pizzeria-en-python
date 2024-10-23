@@ -33,7 +33,11 @@ frame2 = tk.Frame(root, bg="#de2605", height=500, width=500, border=20, relief="
 frame2.grid(row=0, column=1, pady=150)
 frame2.grid_propagate(False)
 
-labelTitulo = tk.Label(root, text="Voglio la pizza",foreground="black",bg="#d66439",height=2, width=22,  font=("Garamond", 25, "bold"), border=10, relief="groove")
+#frameTitulo = tk.Frame(root, bg="#de2605", height=150, width=500, border=20, relief="groove")
+#frameTitulo.grid(row=0, column=1, pady=(0,650))
+#frameTitulo.grid_propagate(False)
+
+labelTitulo = tk.Label(root, text="Voglio la pizza",foreground="black",bg="#d66439",height=2, width=22,  font=("Garamond", 25, "bold"), border=15, relief="groove")
 labelTitulo.grid(row=0, column=1, padx=(20,30), pady=(0,650))
 labelTitulo.grid_propagate(False)
 
@@ -223,10 +227,10 @@ label11.grid(row=11,column=5, padx=(30,0))
 label12 = tk.Label(frame3, text="$2.75", font=("Helvetica", 10, "bold"), bg="#f16e56")
 label12.grid(row=12,column=5, padx=(30,0))
 
-label13 = tk.Label(frame3, text="$2.75", font=("Helvetica", 10, "bold"), bg="#f16e56")
+label13 = tk.Label(frame3, text="$0.75", font=("Helvetica", 10, "bold"), bg="#f16e56")
 label13.grid(row=13,column=5, padx=(30,0))
 
-label14 = tk.Label(frame3, text="$2.75", font=("Helvetica", 10, "bold"), bg="#f16e56")
+label14 = tk.Label(frame3, text="$0.35", font=("Helvetica", 10, "bold"), bg="#f16e56")
 label14.grid(row=14,column=5, padx=(30,0))
 
 #CONTENEDORES DE VARIABLES
@@ -245,13 +249,13 @@ def limitCheckButtons(checkVariable, n):
     
     global contador
     global contenedor
-    #checkBotones = [checkbutton1, checkbutton2, checkbutton3, checkbutton4]
+    
    
     if(checkVariable.get() == 1 ):
-        print(f"Entro boton #{checkVariables.index(checkVariable)+1}")
+        
         contenedor.append(checkBotones[checkVariables.index(checkVariable)])
     else:
-        print(f"Se apago boton #{checkVariables.index(checkVariable)+1}")
+        
         contenedor.pop(contenedor.index(checkBotones[checkVariables.index(checkVariable)]))
             
 
@@ -264,11 +268,6 @@ def limitCheckButtons(checkVariable, n):
         for i in checkBotones:
             if(i.config(state="normal") == "normal"):
                 print(f"Boton {i}")
-    print(checkVariable1.get())
-    print(checkVariable2.get())
-    print(checkVariable6.get())
-    print(eleccion.get()) 
-
 
     checkearStatusCombo()
 
@@ -292,6 +291,8 @@ def combo1(variableCombo):
         checkVariable3.set(0)
         checkVariable4.set(0)
         checkVariable5.set(0)
+        checkVariable7.set(0)
+        checkVariable8.set(0)
 
         checkVariable1.set(1)
         limitCheckButtons(checkVariable1, 3)
@@ -339,6 +340,8 @@ def combo2(variableCombo):
         checkVariable3.set(0)
         checkVariable4.set(0)
         checkVariable6.set(0)
+        checkVariable7.set(0)
+        checkVariable8.set(0)
 
         checkVariable1.set(1)
         limitCheckButtons(checkVariable1, 3)
@@ -446,31 +449,15 @@ def getPrecios():
                          checkbutton3: 1.25,
                          checkbutton4: 1.75,
                          checkbutton5: 1.10,
-                         checkbutton6: 2.75
+                         checkbutton6: 2.75,
+                         checkbutton7: 0.75,
+                         checkbutton8: 0.35
                         }
     
     for i in contenedor:
 
         totalCheckButtons+=preciosIngredientes[i]
     
-
-#def descuento(total):
-
- #   global descuentoTemporal
-    
-  #  descuentoTemporal=0
-
-   # total = total*int(cantPizzas.get())
-
-   # if(total > 30):
-       # descuentoTemporal = total*0.05
-       # return descuentoTemporal
-    
-  #  elif(total >=20 and total <=30):
-
-   #     descuentoTemporal = total*0.02
-   #     return descuentoTemporal
-
 subTotal = 0
 
 numPedido = 0
@@ -479,7 +466,7 @@ def agregar():
 
     if(eleccion.get() == 0 or len(contenedor) != 3 or cantPizzas.get() == ""):
         messagebox.showerror("ERROR AL AGREGAR", "No ha terminado de llenar la informacion.\n\nElija 3 ingredientes, un tamaño y la cantidad")
-        #messagebox.showinfo("", "Este es un mensaje de información.")
+        
     
     else:
         #ANALIZAR LAS VARIABLES, ELIMINAR LAS QUE NO SE USEN
@@ -498,7 +485,7 @@ def agregar():
 
             for widget in subFrame2.winfo_children():
                 if(widget != labelFactura):
-                    widget.destroy()  # Eliminar (destruir) todos los widgets dentro del Frame
+                    widget.destroy()  # Eliminar todos los widgets dentro del Frame
 
             rowPedidos = 0
 
@@ -553,8 +540,6 @@ def agregar():
             pedido.grid(row=rowPedidos+1, column=0, padx=(0,100))
             rowPedidos+=1
 
-            print(totalCompras)
-
             labelNumSubTotal.config(text=f'${round(subTotalFinal + descuentoTotal, 2)}')
             labelDescuento.config(text=round(descuentoTotal, 2))
             labelNumTotal.config(text=f'${round((totalCompras), 2)}')
@@ -567,7 +552,5 @@ buttonAgregar = tk.Button(frame2, text="Agregar", bg="light coral",border=5, rel
 buttonAgregar.grid(row=4, column=1, pady=(20,0))
 
 #Corre en bucle el programa 
-
-print("LLego al final")
 
 root.mainloop()
