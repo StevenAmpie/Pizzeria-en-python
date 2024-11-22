@@ -376,8 +376,8 @@ def combo2(variableCombo):
 
 
 # Cargar imagenes 
-image1_path = "Pizzeria en Python/combo1.jpg"
-image2_path = "Pizzeria en Python/combo2.jpg"
+image1_path = "combo1.jpg"
+image2_path = "combo2.jpg"
 image1 = Image.open(image1_path)
 image2 = Image.open(image2_path)
 
